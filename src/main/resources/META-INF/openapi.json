@@ -1,0 +1,144 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "POHEMAMI API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/randomnames": {
+            "summary": "Path used to manage the list of randomnames.",
+            "description": "The REST endpoint/path used to list and create zero or more `RandomName` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RandomName"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `RandomName` entities."
+                    }
+                },
+                "operationId": "getRandomNames",
+                "summary": "List All RandomNames",
+                "description": "Gets a list of all `RandomName` entities."
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new `RandomName` to be created.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RandomName"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "createRandomName",
+                "summary": "Create a RandomName",
+                "description": "Creates a new instance of a `RandomName`."
+            },
+            "parameters": [
+                {
+                    "name": "size",
+                    "description": "",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "query"
+                }
+            ]
+        },
+        "/randomnames/{randomnameId}": {
+            "summary": "Path used to manage a single RandomName.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `RandomName`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RandomName"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `RandomName`."
+                    }
+                },
+                "operationId": "getRandomName",
+                "summary": "Get a RandomName",
+                "description": "Gets the details of a single instance of a `RandomName`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `RandomName` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RandomName"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "updateRandomName",
+                "summary": "Update a RandomName",
+                "description": "Updates an existing `RandomName`."
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "deleteRandomName",
+                "summary": "Delete a RandomName",
+                "description": "Deletes an existing `RandomName`."
+            },
+            "parameters": [
+                {
+                    "name": "randomnameId",
+                    "description": "A unique identifier for a `RandomName`.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "RandomName": {
+                "title": "Root Type for RandomName",
+                "description": "A random name",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "name": "Sample Name"
+                }
+            }
+        }
+    }
+}
